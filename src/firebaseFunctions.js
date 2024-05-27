@@ -75,7 +75,7 @@ export const logProgress = async (
 };
 
 export const fetchProgress = async (year, week) => {
-  const dbRef = ref(database, `progress/${year}/${week}`);
+  const dbRef = ref(database, `progress/`);
   const snapshot = await get(dbRef);
   if (snapshot.exists()) {
     return snapshot.val();
