@@ -15,9 +15,9 @@ import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [workouts, setWorkouts] = useState([]);
-  const [currentDay, setCurrentDay] = useState(
-    new Date().toLocaleDateString("en-US", { weekday: "long" })
-  );
+  const currentDay = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+  });
   const [checkedSets, setCheckedSets] = useState({});
   const navigate = useNavigate();
 
@@ -69,8 +69,13 @@ const HomePage = () => {
           Weekly Schedule
         </Button>
         <List spacing={3} w='100%'>
-          {workouts.map((workout, index) => (
-            <ListItem key={index} p={2} border='1px solid' borderRadius='md'>
+          {workouts.map((workout) => (
+            <ListItem
+              key={workout.id}
+              p={2}
+              border='1px solid'
+              borderRadius='md'
+            >
               <Heading size='md'>{workout.name}</Heading>
               <Text>
                 <a
@@ -84,7 +89,7 @@ const HomePage = () => {
               <Text>1 Rep Max: {workout.oneRepMax} kg</Text>
               <List>
                 {workout.reps.map((rep, i) => (
-                  <ListItem key={i}>
+                  <ListItem key={`${workout.id}-${i}`}>
                     <Checkbox
                       isChecked={checkedSets[workout.id]?.[i] || false}
                       onChange={() => handleCheckboxChange(workout.id, i)}
@@ -101,7 +106,7 @@ const HomePage = () => {
               </List>
               <List>
                 {workout.tips.map((tip, i) => (
-                  <ListItem key={i}>
+                  <ListItem key={`${workout.id}-tip-${i}`}>
                     <Text as='i'>{tip}</Text>
                   </ListItem>
                 ))}
