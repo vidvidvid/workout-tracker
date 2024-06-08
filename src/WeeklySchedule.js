@@ -102,8 +102,8 @@ const WeeklySchedule = () => {
           />
         </FormControl>
         <List spacing={3} w='100%'>
-          {["Monday", "Tuesday", "Thursday", "Friday"].map((day, index) => (
-            <Box key={index}>
+          {["Monday", "Tuesday", "Thursday", "Friday"].map((day) => (
+            <Box key={day}>
               {(!showTodayOnly || day === currentDay) && (
                 <>
                   <Heading size='lg'>{day}</Heading>
@@ -111,7 +111,7 @@ const WeeklySchedule = () => {
                     .filter((workout) => workout.day === day)
                     .map((workout, i) => (
                       <ListItem
-                        key={i}
+                        key={workout.id}
                         p={2}
                         border='1px solid'
                         borderRadius='md'
@@ -128,7 +128,7 @@ const WeeklySchedule = () => {
                         </Text>
                         <List>
                           {workout.reps.map((rep, j) => (
-                            <ListItem key={j}>
+                            <ListItem key={rep.value}>
                               <Checkbox
                                 isChecked={
                                   progress[new Date().getFullYear()]?.[
@@ -151,7 +151,7 @@ const WeeklySchedule = () => {
                         </List>
                         <List>
                           {workout.tips.map((tip, k) => (
-                            <ListItem key={k}>
+                            <ListItem key={tip}>
                               <Text as='i'>{tip}</Text>
                             </ListItem>
                           ))}

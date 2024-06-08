@@ -89,7 +89,7 @@ const HomePage = () => {
               <Text>1 Rep Max: {workout.oneRepMax} kg</Text>
               <List>
                 {workout.reps.map((rep, i) => (
-                  <ListItem key={`${workout.id}-${i}`}>
+                  <ListItem key={rep.value}>
                     <Checkbox
                       isChecked={checkedSets[workout.id]?.[i] || false}
                       onChange={() => handleCheckboxChange(workout.id, i)}
@@ -105,8 +105,8 @@ const HomePage = () => {
                 ))}
               </List>
               <List>
-                {workout.tips.map((tip, i) => (
-                  <ListItem key={`${workout.id}-tip-${i}`}>
+                {workout.tips.map((tip) => (
+                  <ListItem key={tip}>
                     <Text as='i'>{tip}</Text>
                   </ListItem>
                 ))}
